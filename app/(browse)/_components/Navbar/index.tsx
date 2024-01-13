@@ -1,6 +1,6 @@
-import Logo from './_components/Logo/Logo';
-import Search from './_components/Search/Search';
-import Actions from './_components/Actions/Actions';
+import Logo from './_components/Logo';
+import Search from './_components/Search';
+import Actions from './_components/Actions';
 
 const NavBar = () => {
   return (
