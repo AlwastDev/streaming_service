@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     });
   }
 
-  const payload: any = await req.json();
+  const payload = await req.json();
   const body = JSON.stringify(payload);
 
   const wh = new Webhook(WEBHOOK_SECRET);

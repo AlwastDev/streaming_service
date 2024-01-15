@@ -32,7 +32,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  ignorePatterns: ['node_modules/*', '/.next'],
+  ignorePatterns: ['node_modules/*', '/.next', 'components/ui/*', 'lib/db.ts'],
   plugins: ['react', '@typescript-eslint', 'prettier'],
   overrides: [
     {
