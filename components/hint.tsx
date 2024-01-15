@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 interface HintProps {
@@ -9,7 +10,7 @@ interface HintProps {
   align?: 'start' | 'center' | 'end';
 }
 
-const Hint: FC<HintProps> = ({ label, children, asChild, side, align }) => {
+export const Hint: FC<HintProps> = ({ label, children, asChild, side, align }) => {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={0}>
@@ -21,5 +22,3 @@ const Hint: FC<HintProps> = ({ label, children, asChild, side, align }) => {
     </TooltipProvider>
   );
 };
-
-export default Hint;

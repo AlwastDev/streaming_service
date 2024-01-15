@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { currentUser, SignInButton, UserButton } from '@clerk/nextjs';
 import { Clapperboard } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 
-const Actions = async () => {
+import { Button } from '@/components/ui/button';
+
+export const Actions = async () => {
   const user = await currentUser();
 
   return (
@@ -19,7 +20,7 @@ const Actions = async () => {
         <div className="flex items-center gap-x-4">
           <Button asChild size="sm" variant="ghost" className="text-muted-foreground hover:text-primary">
             <Link href={`/u/${user.username}`}>
-              <Clapperboard className="h-5 w-5 lg:mr-2" />
+              <Clapperboard className="size-5 lg:mr-2" />
               <span className="hidden lg:block">Dashboard</span>
             </Link>
           </Button>
@@ -29,5 +30,3 @@ const Actions = async () => {
     </div>
   );
 };
-
-export default Actions;

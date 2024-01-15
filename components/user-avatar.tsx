@@ -1,10 +1,22 @@
 import { FC } from 'react';
-import { VariantProps } from 'class-variance-authority';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { cva, type VariantProps } from 'class-variance-authority';
+
 import { cn } from '@/lib/utils';
-import LiveBadge from '@/components/live-badge';
-import { avatarSizes } from '@/lib/avatar-sizes';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { LiveBadge } from '@/components/live-badge';
+
+const avatarSizes = cva('', {
+  variants: {
+    size: {
+      default: 'size-8',
+      lg: 'size-14',
+    },
+  },
+  defaultVariants: {
+    size: 'default',
+  },
+});
 
 interface UserAvatarProps extends VariantProps<typeof avatarSizes> {
   username: string;
@@ -21,7 +33,8 @@ export const UserAvatar: FC<UserAvatarProps> = ({ username, imageUrl, isLive, sh
       <Avatar className={cn(isLive && 'ring-2 ring-rose-500 border border-background', avatarSizes({ size }))}>
         <AvatarImage src={imageUrl} className="object-cover" />
         <AvatarFallback>
-          {username[0]} {username[username.length - 1]}
+          {username[0]}
+          {username[username.length - 1]}
         </AvatarFallback>
       </Avatar>
       {canShowBadge && (

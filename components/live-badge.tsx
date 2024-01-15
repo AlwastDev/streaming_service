@@ -1,11 +1,12 @@
 import { FC } from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface LiveBadgeProps {
   className?: string;
 }
 
-const LiveBadge: FC<LiveBadgeProps> = ({ className }) => {
+export const LiveBadge: FC<LiveBadgeProps> = ({ className }) => {
   return (
     <div
       className={cn(
@@ -17,5 +18,3 @@ const LiveBadge: FC<LiveBadgeProps> = ({ className }) => {
     </div>
   );
 };
-
-export default LiveBadge;

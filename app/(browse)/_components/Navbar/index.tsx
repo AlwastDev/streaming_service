@@ -1,8 +1,8 @@
-import Logo from './_components/Logo';
-import Search from './_components/Search';
-import Actions from './_components/Actions';
+import { Logo } from './_components/Logo';
+import { Search } from './_components/Search';
+import { Actions } from './_components/Actions';
 
-const NavBar = () => {
+export const NavBar = () => {
   return (
     <nav
       className="fixed top-0 z-[49] flex h-20 w-full items-center
@@ -14,5 +14,3 @@ const NavBar = () => {
     </nav>
   );
 };
-
-export default NavBar;

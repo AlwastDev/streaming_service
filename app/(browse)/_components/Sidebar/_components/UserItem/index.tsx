@@ -3,17 +3,18 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
 import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/user-avatar';
-import { cn } from '@/lib/utils';
-import LiveBadge from '@/components/live-badge';
+import { LiveBadge } from '@/components/live-badge';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface UserItemProps {
   username: string;
   imageUrl: string;
-  isLive: boolean;
+  isLive?: boolean;
 }
 
 export const UserItem: FC<UserItemProps> = ({ username, imageUrl, isLive }) => {
