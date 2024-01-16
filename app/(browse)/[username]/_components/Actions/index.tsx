@@ -1,46 +1,29 @@
 'use client';
 
-import { FC, useTransition } from 'react';
-import { toast } from 'sonner';
+import { FC } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { onFollow, onUnfollow } from '@/actions/follow';
+import { useBlockUser } from '../../hooks/useBlockUser';
+import { useFollowUser } from '../../hooks/useFollowUser';
 
 interface ActionsProps {
   isFollowing: boolean;
+  isBlocked: boolean;
   userId: string;
 }
 
-export const Actions: FC<ActionsProps> = ({ isFollowing, userId }) => {
-  const [isPending, startTransition] = useTransition();
-
-  const handleFollow = () => {
-    startTransition(() => {
-      onFollow(userId)
-        .then((data) => toast.success(`You are now following ${data.following.username}`))
-        .catch(() => toast.error('Something went wrong'));
-    });
-  };
-
-  const handleUnfollow = () => {
-    startTransition(() => {
-      onUnfollow(userId)
-        .then((data) => toast.success(`You have unfollowed ${data.following.username}`))
-        .catch(() => toast.error('Something went wrong'));
-    });
-  };
-
-  const onClick = () => {
-    if (isFollowing) {
-      handleUnfollow();
-    } else {
-      handleFollow();
-    }
-  };
+export const Actions: FC<ActionsProps> = ({ isFollowing, isBlocked, userId }) => {
+  const { isBlockPending, onClickBlock } = useBlockUser({ userId, isBlocked });
+  const { isFollowPending, onClickFollow } = useFollowUser({ userId, isFollowing });
 
   return (
-    <Button disabled={isPending} onClick={onClick} variant="primary">
-      {isFollowing ? 'Unfollow' : 'Follow'}
-    </Button>
+    <>
+      <Button disabled={isFollowPending} onClick={onClickFollow} variant="primary">
+        {isFollowing ? 'Unfollow' : 'Follow'}
+      </Button>
+      <Button disabled={isBlockPending} onClick={onClickBlock}>
+        {isBlocked ? 'Unblock' : 'Block'}
+      </Button>
+    </>
   );
 };
