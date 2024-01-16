@@ -7,6 +7,7 @@ import { useSidebar } from '@/store/use-sidebar';
 import { cn } from '@/lib/utils';
 import { ToggleSkeleton } from '../Toggle';
 import { RecommendedSkeleton } from '../Recommended';
+import { FollowedSkeleton } from '@/app/(browse)/_components/Sidebar/_components/Followed';
 
 interface WrapperProps {
   children: React.ReactNode;
@@ -20,6 +21,7 @@ export const Wrapper: FC<WrapperProps> = ({ children }) => {
     return (
       <aside className="fixed left-0 z-50 flex h-full w-[70px] flex-col border-r border-[#2D2E35] bg-background lg:w-60">
         <ToggleSkeleton />
+        <FollowedSkeleton />
         <RecommendedSkeleton />
       </aside>
     );
