@@ -27,7 +27,7 @@ export default async function UserPage({ params }: UserPageProps) {
 
   return (
     <div className="flex flex-col gap-y-4">
-      <Actions userId={user.id} isFollowing={isFollowing} isBlocked={isBlocked} />
+      <Actions userId={user.id} isFollowing={isFollowing} />
     </div>
   );
 }
