@@ -3,7 +3,7 @@
 import { FC, useTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
-import { useFollowUser } from '../../hooks/useFollowUser';
+import { useFollowUser } from '@/hooks/useFollowUser';
 import { onBlock } from '@/actions/block';
 import { toast } from 'sonner';
 
