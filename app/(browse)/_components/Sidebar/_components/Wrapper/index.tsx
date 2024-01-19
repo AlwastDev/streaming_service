@@ -7,7 +7,7 @@ import { useSidebar } from '@/store/use-sidebar';
 import { cn } from '@/lib/utils';
 import { ToggleSkeleton } from '../Toggle';
 import { RecommendedSkeleton } from '../Recommended';
-import { FollowedSkeleton } from '@/app/(browse)/_components/Sidebar/_components/Followed';
+import { FollowedSkeleton } from '../Followed';
 
 interface WrapperProps {
   children: React.ReactNode;

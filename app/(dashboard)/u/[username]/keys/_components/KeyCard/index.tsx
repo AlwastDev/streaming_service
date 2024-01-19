@@ -3,7 +3,7 @@
 import { FC, useState } from 'react';
 
 import { Input } from '@/components/ui/input';
-import { CopyButton } from '@/app/(dashboard)/u/[username]/keys/_components/CopyButton';
+import { CopyButton } from '../CopyButton';
 import { Button } from '@/components/ui/button';
 
 interface KeyCardProps {
