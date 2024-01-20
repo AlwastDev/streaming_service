@@ -1,13 +1,13 @@
 'use client';
 
 import { FC } from 'react';
-import { Follow, User } from '@prisma/client';
+import { Follow, Stream, User } from '@prisma/client';
 
 import { useSidebar } from '@/store/use-sidebar';
 import { UserItem, UserItemSkeleton } from '../UserItem';
 
 interface FollowedProps {
-  followers: (Follow & { following: User })[];
+  followers: (Follow & { following: User & { stream: Stream | null } })[];
 }
 
 export const Followed: FC<FollowedProps> = ({ followers }) => {
@@ -27,7 +27,11 @@ export const Followed: FC<FollowedProps> = ({ followers }) => {
       <ul className="space-y-2 px-2">
         {followers.map((follower) => (
           <li key={follower.following.id}>
-            <UserItem username={follower.following.username} imageUrl={follower.following.imageUrl} isLive={true} />
+            <UserItem
+              username={follower.following.username}
+              imageUrl={follower.following.imageUrl}
+              isLive={follower.following.stream?.isLive}
+            />
           </li>
         ))}
       </ul>

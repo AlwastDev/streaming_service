@@ -5,7 +5,7 @@ export const getFollowedUsers = async () => {
   try {
     const self = await getSelf();
 
-    return db.follow.findMany({
+    const followedUsers = db.follow.findMany({
       where: {
         followerId: self.id,
         following: {
@@ -17,9 +17,15 @@ export const getFollowedUsers = async () => {
         },
       },
       include: {
-        following: true,
+        following: {
+          include: {
+            stream: true,
+          },
+        },
       },
     });
+
+    return followedUsers;
   } catch {
     return [];
   }
