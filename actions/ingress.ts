@@ -1,18 +1,19 @@
 'use server';
 
-import { TrackSource } from 'livekit-server-sdk/dist/proto/livekit_models';
 import {
-  type CreateIngressOptions,
   IngressAudioEncodingPreset,
-  IngressClient,
   IngressInput,
+  IngressClient,
   IngressVideoEncodingPreset,
   RoomServiceClient,
+  type CreateIngressOptions,
 } from 'livekit-server-sdk';
-import { revalidatePath } from 'next/cache';
 
-import { getSelf } from '@/lib/auth-service';
+import { TrackSource } from 'livekit-server-sdk/dist/proto/livekit_models';
+
 import { db } from '@/lib/db';
+import { getSelf } from '@/lib/auth-service';
+import { revalidatePath } from 'next/cache';
 
 const roomService = new RoomServiceClient(
   process.env.LIVEKIT_API_URL!,
@@ -39,6 +40,7 @@ export const resetIngresses = async (hostIdentity: string) => {
     }
   }
 };
+
 export const createIngress = async (ingressType: IngressInput) => {
   const self = await getSelf();
 
@@ -63,7 +65,6 @@ export const createIngress = async (ingressType: IngressInput) => {
       preset: IngressAudioEncodingPreset.OPUS_STEREO_96KBPS,
     };
   }
-
   const ingress = await ingressClient.createIngress(ingressType, options);
 
   if (!ingress || !ingress.url || !ingress.streamKey) {
@@ -79,7 +80,6 @@ export const createIngress = async (ingressType: IngressInput) => {
     },
   });
 
-  revalidatePath(`u/${self.username}/keys`);
-
+  revalidatePath(`/u/${self.username}/keys`);
   return ingress;
 };
