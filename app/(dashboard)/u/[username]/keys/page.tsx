@@ -9,7 +9,7 @@ export default async function KeysPage() {
   const stream = await getStreamByUserId(self.id);
 
   if (!stream) {
-    throw new Error('Stream not found');
+    throw new Error('stream not found');
   }
 
   return (

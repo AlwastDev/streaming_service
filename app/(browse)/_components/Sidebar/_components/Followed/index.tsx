@@ -1,13 +1,13 @@
 'use client';
 
 import { FC } from 'react';
-import { Follow, Stream, User } from '@prisma/client';
+import { Follow, User } from '@prisma/client';
 
 import { useSidebar } from '@/store/use-sidebar';
 import { UserItem, UserItemSkeleton } from '../UserItem';
 
 interface FollowedProps {
-  followers: (Follow & { following: User & { stream: Stream | null } })[];
+  followers: (Follow & { following: User & { stream: { isLive: boolean } | null } })[];
 }
 
 export const Followed: FC<FollowedProps> = ({ followers }) => {
