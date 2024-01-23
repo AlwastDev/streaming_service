@@ -1,7 +1,7 @@
 import { currentUser } from '@clerk/nextjs';
 
 import { getUserByUsername } from '@/lib/user-service';
-import { StreamPlayer } from '../../../../../components/stream/stream-player';
+import { StreamPlayer } from '@/components/stream/stream-player';
 
 interface CreatorPageProps {
   params: {
