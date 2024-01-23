@@ -7,8 +7,8 @@ import { LiveKitRoom } from '@livekit/components-react';
 import { cn } from '@/lib/utils';
 import { useViewerToken } from '@/hooks/useViewerToken';
 import { useChatSidebar } from '@/store/use-chat-sidebar';
-import { Video } from '@/components/stream/video';
-import { Chat } from '@/components/stream/chat';
+import { Video, VideoSkeleton } from '@/components/stream/video';
+import { Chat, ChatSkeleton } from '@/components/stream/chat';
 import { ChatToggle } from '@/components/stream/chat-toggle';
 
 interface StreamPlayerProps {
@@ -22,7 +22,7 @@ export const StreamPlayer: FC<StreamPlayerProps> = ({ user, stream, isFollowing 
   const { collapsed } = useChatSidebar((state) => state);
 
   if (!token || !name || !identity) {
-    return <div>Cannot watch the stream</div>;
+    return <StreamPlayerSkeleton />;
   }
 
   return (
@@ -56,5 +56,18 @@ export const StreamPlayer: FC<StreamPlayerProps> = ({ user, stream, isFollowing 
         </div>
       </LiveKitRoom>
     </>
+  );
+};
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6">
+      <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
+        <VideoSkeleton />
+      </div>
+      <div className="col-span-1 bg-background">
+        <ChatSkeleton />
+      </div>
+    </div>
   );
 };
