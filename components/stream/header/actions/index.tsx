@@ -40,7 +40,7 @@ export const Actions: FC<ActionsProps> = ({ hostIdentity, isFollowing, isHost })
   };
 
   const toggleFollow = () => {
-    if (userId) {
+    if (!userId) {
       return router.push('/sign-in');
     }
 

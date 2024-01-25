@@ -16,8 +16,6 @@ export async function POST(req: Request) {
 
   const event = receiver.receive(body, authorization);
 
-  console.log(event.ingressInfo?.ingressId);
-
   if (event.event === 'ingress_started') {
     await db.stream.update({
       where: {
