@@ -4,9 +4,9 @@ import { FC } from 'react';
 import { useConnectionState, useRemoteParticipant, useTracks } from '@livekit/components-react';
 import { ConnectionState, Track } from 'livekit-client';
 
-import { OfflineVideo } from '@/components/stream/offline-video';
-import { LoadingVideo } from '@/components/stream/loading';
-import { LiveVideo } from '@/components/stream/live-video';
+import { OfflineVideo } from '@/components/stream/video/offline-video';
+import { LoadingVideo } from '@/components/stream/video/loading';
+import { LiveVideo } from '@/components/stream/video/live-video';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface VideoProps {

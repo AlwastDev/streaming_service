@@ -1,4 +1,4 @@
-import { StreamPlayerSkeleton } from '@/components/stream/stream-player';
+import { StreamPlayerSkeleton } from '../../../../../components/stream/stream-player';
 
 export default async function CreatorLoading() {
   return (

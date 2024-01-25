@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import { ReceivedChatMessage } from '@livekit/components-core';
 
-import { ChatMessage } from '@/components/stream/chat-message';
+import { ChatMessage } from '@/components/stream/chat/chat-message';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface ChatListProps {

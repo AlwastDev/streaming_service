@@ -1,5 +1,3 @@
-'use client';
-
 import { FC } from 'react';
 import { Volume1, Volume2, VolumeX } from 'lucide-react';
 
