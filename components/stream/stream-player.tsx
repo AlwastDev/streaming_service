@@ -8,10 +8,11 @@ import { cn } from '@/lib/utils';
 import { useViewerToken } from '@/hooks/useViewerToken';
 import { useChatSidebar } from '@/store/use-chat-sidebar';
 
+import { ChatToggle } from './chat/chat-toggle';
 import { Video, VideoSkeleton } from '@/components/stream/video/video';
 import { Chat, ChatSkeleton } from '@/components/stream/chat/chat';
-import { ChatToggle } from './chat/chat-toggle';
 import { Header, HeaderSkeleton } from '@/components/stream/header/header';
+import { InfoCard } from '@/components/stream/info-card/info-card';
 
 interface StreamPlayerProps {
   user: User & { stream: Stream | null };
@@ -51,6 +52,12 @@ export const StreamPlayer: FC<StreamPlayerProps> = ({ user, stream, isFollowing 
             imageUrl={user.imageUrl}
             isFollowing={isFollowing}
             name={stream.name}
+          />
+          <InfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            name={stream.name}
+            thumbnailUrl={stream.thumbnailUrl}
           />
         </div>
         <div className={cn('col-span-1', collapsed && 'hidden')}>
