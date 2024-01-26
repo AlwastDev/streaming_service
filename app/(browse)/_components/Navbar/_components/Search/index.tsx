@@ -15,7 +15,9 @@ export const Search = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!value) return;
+    if (!value) {
+      return router.push('/');
+    }
 
     const url = qs.stringifyUrl(
       {
@@ -30,6 +32,7 @@ export const Search = () => {
 
   const onClear = () => {
     setValue('');
+    router.push('/');
   };
 
   return (
