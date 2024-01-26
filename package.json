@@ -10,7 +10,8 @@
     "generate": "npx prisma generate",
     "push": "npx prisma db push",
     "studio": "npx prisma studio",
-    "migrate": "npx prisma migrate reset"
+    "migrate": "npx prisma migrate reset",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.1",
