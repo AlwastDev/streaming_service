@@ -23,7 +23,9 @@ export const ResultsSkeleton = () => {
     <div>
       <Skeleton className="mb-4 h-8 w-[290px]" />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {[...Array(4).map((_, i) => <ResultCardSkeleton key={`${i}_resultCardSkeleton`} />)]}
+        {[...Array(4)].map((_, i) => (
+          <ResultCardSkeleton key={i} />
+        ))}
       </div>
     </div>
   );
