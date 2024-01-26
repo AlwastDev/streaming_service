@@ -20,8 +20,8 @@ export const isBlockedByUser = async (id: string) => {
     const existingBlock = await db.block.findUnique({
       where: {
         blockerId_blockedId: {
-          blockerId: self.id,
-          blockedId: otherUser.id,
+          blockerId: otherUser.id,
+          blockedId: self.id,
         },
       },
     });
@@ -36,7 +36,7 @@ export const blockUser = async (id: string) => {
   const self = await getSelf();
 
   if (self.id === id) {
-    throw new Error('Can not block yourself');
+    throw new Error('Cannot block yourself');
   }
 
   const otherUser = await db.user.findUnique({
@@ -70,24 +70,6 @@ export const blockUser = async (id: string) => {
     },
   });
 
-  const existingFollow = await db.follow.findFirst({
-    where: {
-      followerId: self.id,
-      followingId: otherUser.id,
-    },
-  });
-
-  if (existingFollow) {
-    await db.follow.delete({
-      where: {
-        id: existingFollow.id,
-      },
-      include: {
-        following: true,
-      },
-    });
-  }
-
   return block;
 };
 
@@ -95,7 +77,7 @@ export const unblockUser = async (id: string) => {
   const self = await getSelf();
 
   if (self.id === id) {
-    throw new Error('Can not unblock yourself');
+    throw new Error('Cannot unblock yourself');
   }
 
   const otherUser = await db.user.findUnique({
@@ -129,4 +111,19 @@ export const unblockUser = async (id: string) => {
   });
 
   return unblock;
+};
+
+export const getBlockedUsers = async () => {
+  const self = await getSelf();
+
+  const blockedUsers = await db.block.findMany({
+    where: {
+      blockerId: self.id,
+    },
+    include: {
+      blocked: true,
+    },
+  });
+
+  return blockedUsers;
 };

@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
 
 import { db } from '@/lib/db';
+import { resetIngresses } from '@/actions/ingress';
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -17,7 +18,7 @@ export async function POST(req: Request) {
   const svix_signature = headerPayload.get('svix-signature');
 
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response('Error occurred -- no svix headers', {
+    return new Response('Error occured -- no svix headers', {
       status: 400,
     });
   }
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
     }) as WebhookEvent;
   } catch (err) {
     console.error('Error verifying webhook:', err);
-    return new Response('Error occurred', {
+    return new Response('Error occured', {
       status: 400,
     });
   }
@@ -51,25 +52,48 @@ export async function POST(req: Request) {
         username: payload.data.username,
         imageUrl: payload.data.image_url,
         stream: {
-          create: { name: `${payload.data.username}'s stream` },
+          create: {
+            name: `${payload.data.username}'s stream`,
+          },
         },
       },
     });
   }
 
   if (eventType === 'user.updated') {
-    await db.user.update({
-      where: {
-        externalUserId: payload.data.id,
-      },
-      data: {
-        username: payload.data.username,
-        imageUrl: payload.data.image_url,
-      },
+    const user = await db.user.findUnique({
+      where: { id: payload.data.id },
     });
+
+    if (user) {
+      await db.user.update({
+        where: {
+          externalUserId: payload.data.id,
+        },
+        data: {
+          username: payload.data.username,
+          imageUrl: payload.data.image_url,
+        },
+      });
+    } else {
+      await db.user.create({
+        data: {
+          externalUserId: payload.data.id,
+          username: payload.data.username,
+          imageUrl: payload.data.image_url,
+          stream: {
+            create: {
+              name: `${payload.data.username}'s stream`,
+            },
+          },
+        },
+      });
+    }
   }
 
   if (eventType === 'user.deleted') {
+    await resetIngresses(payload.data.id);
+
     await db.user.delete({
       where: {
         externalUserId: payload.data.id,
