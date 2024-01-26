@@ -11,7 +11,7 @@ const Logo = () => {
   return (
     <div className="flex flex-col items-center gap-y-4">
       <div className="rounded-full bg-white p-1">
-        <Image src="/spooky.svg" alt="Gamehub" height="80" width="80" />
+        <Image priority src="/spooky.svg" alt="streaming service" height="80" width="80" />
       </div>
       <div className={cn('flex flex-col items-center', poppins.className)}>
         <p className="text-xl font-semibold">Streaming service</p>
