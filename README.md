@@ -4,13 +4,13 @@ This is a repository for Fullstack Streaming Service: Next.js 14, React 18, Live
 
 ## Features:
 
-:satellite: Streaming using RTMP / WHIP protocols (LiveKit)
-:thought_balloon: Real-time chat using sockets
-:closed_lock_with_key: Authentication
-:camera: Thumbnail upload
-:busts_in_silhouette: Following system
-:no_entry_sign: Blocking system
-:mag: Search results page
++ :satellite: Streaming using RTMP / WHIP protocols (LiveKit)
++ :thought_balloon: Real-time chat using sockets
++ :closed_lock_with_key: Authentication (Clerk)
++ :camera: Get and upload images (Uploadthing)
++ :busts_in_silhouette: Following system
++ :no_entry_sign: Blocking system
++ :mag: Search results page
 
 ## Requirements
 
@@ -50,10 +50,8 @@ Add MySQL Database (I used PlanetScale)
 
 
 ```bash
-
 yarn generate or (npx prisma generate)
 yarn push or (npx prisma db push)
-
 ```
 
 ## Start the app
