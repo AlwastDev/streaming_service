@@ -15,15 +15,9 @@ const roomService = new RoomServiceClient(
 export const onBlock = async (id: string) => {
   const self = await getSelf();
 
-  let blockedUser;
+  const blockedUser = await blockUser(id);
 
-  try {
-    blockedUser = await blockUser(id);
-  } catch {}
-
-  try {
-    await roomService.removeParticipant(self.id, id);
-  } catch {}
+  await roomService.removeParticipant(self.id, id);
 
   revalidatePath(`/u/${self.username}/community`);
 
